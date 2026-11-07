@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Planejamento do Cultivo | AgroTech — Todos Contra a Fome</title>
+  <meta name="description" content="Informe cultura, área e localização para ver uma demonstração do planejamento do cultivo.">
+  <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="js/main.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="index.html" aria-label="AgroTech — página inicial">
+        <img src="assets/icons/leaf.svg" alt="" width="38" height="38">
+        <span>Agrotech</span>
+      </a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="menu-principal" aria-label="Abrir menu">
+        <span></span>
+      </button>
+      <nav class="nav" id="menu-principal" aria-label="Navegação principal">
+        <ul class="nav-list">
+          <li><a href="index.html">Início</a></li>
+          <li><a href="planejamento.html" aria-current="page">Planejamento</a></li>
+          <li><a href="monitoramento.html">Monitoramento</a></li>
+          <li><a href="ia.html">IA</a></li>
+          <li><a href="contato.html">Contato</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="conteudo">
+    <div class="container split">
+      <section aria-labelledby="titulo-plan">
+        <div class="title-with-icon">
+          <img src="assets/icons/sprout.svg" alt="" width="56" height="56">
+          <h1 id="titulo-plan">Planejamento do Cultivo</h1>
+        </div>
+        <p class="lead" style="margin-top:1rem">Informe os dados da sua plantação para ver como será o planejamento. <span class="demo-badge">Demonstração</span></p>
+
+        <form class="form" id="form-planejamento" aria-describedby="nota-plan">
+          <div class="field">
+            <div class="field-control">
+              <span class="field-icon"><img src="assets/icons/sprout.svg" alt="" width="20" height="20"></span>
+              <label class="sr-label" for="cultura">Cultura agrícola</label>
+              <select id="cultura" name="cultura" required aria-describedby="cultura-erro">
+                <option value="" selected disabled>Selecione a cultura</option>
+                <option value="milho">Milho</option>
+                <option value="soja">Soja</option>
+                <option value="feijao">Feijão</option>
+                <option value="alface">Alface</option>
+                <option value="tomate">Tomate</option>
+              </select>
+            </div>
+            <p class="field-error" id="cultura-erro"></p>
+          </div>
+          <div class="field">
+            <div class="field-control">
+              <span class="field-icon"><img src="assets/icons/area.svg" alt="" width="20" height="20"></span>
+              <label class="sr-label" for="area">Tamanho da área (hectares)</label>
+              <input type="number" id="area" name="area" placeholder="Tamanho da área (hectares)" required min="0.1" max="1000" step="0.1" inputmode="decimal" aria-describedby="area-erro">
+            </div>
+            <p class="field-error" id="area-erro"></p>
+          </div>
+          <div class="field">
+            <div class="field-control">
+              <span class="field-icon"><img src="assets/icons/pin.svg" alt="" width="20" height="20"></span>
+              <label class="sr-label" for="localizacao">Localização do cultivo</label>
+              <input type="text" id="localizacao" name="localizacao" placeholder="Localização (cidade/UF)" required minlength="3" maxlength="80" autocomplete="address-level2" aria-describedby="localizacao-erro">
+            </div>
+            <p class="field-error" id="localizacao-erro"></p>
+          </div>
+          <button class="btn btn-block" type="submit">
+            <img src="assets/icons/check.svg" alt="" width="20" height="20">
+            Gerar Planejamento
+          </button>
+        </form>
+
+        <div class="feedback" id="feedback-planejamento" role="status" aria-live="polite"></div>
+        <p class="demo-note" id="nota-plan">Funcionalidade ilustrativa: não há backend nem análise agronômica real. Nenhum dado é enviado ou armazenado.</p>
+      </section>
+
+      <div class="blob-wrap">
+        <div class="blob">
+          <img src="assets/images/muda.svg" alt="Ilustração de uma muda jovem brotando em solo fértil" width="600" height="600">
+        </div>
+        <div class="blob-badge" aria-hidden="true">
+          <span class="check-circle"><img src="assets/icons/check.svg" alt="" width="18" height="18"></span>
+          Seu planejamento estará pronto em instantes!
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p class="footer-brand"><img src="assets/icons/leaf.svg" alt="" width="22" height="22"> AgroTech | Todos Contra a Fome</p>
+      <p class="footer-msg">Juntos por uma agricultura mais forte e sustentável. <img src="assets/icons/leaf.svg" alt="" width="22" height="22"></p>
+    </div>
+  </footer>
+</body>
+</html>

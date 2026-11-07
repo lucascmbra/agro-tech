@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Monitoramento da Plantação | AgroTech — Todos Contra a Fome</title>
+  <meta name="description" content="Acompanhe as condições da sua lavoura com indicadores demonstrativos e registre observações.">
+  <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="js/main.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="index.html" aria-label="AgroTech — página inicial">
+        <img src="assets/icons/leaf.svg" alt="" width="38" height="38">
+        <span>Agrotech</span>
+      </a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="menu-principal" aria-label="Abrir menu">
+        <span></span>
+      </button>
+      <nav class="nav" id="menu-principal" aria-label="Navegação principal">
+        <ul class="nav-list">
+          <li><a href="index.html">Início</a></li>
+          <li><a href="planejamento.html">Planejamento</a></li>
+          <li><a href="monitoramento.html" aria-current="page">Monitoramento</a></li>
+          <li><a href="ia.html">IA</a></li>
+          <li><a href="contato.html">Contato</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="conteudo">
+    <div class="container page-section">
+      <section aria-labelledby="titulo-mon">
+        <div class="title-with-icon">
+          <img src="assets/icons/chart.svg" alt="" width="56" height="56">
+          <h1 id="titulo-mon">Monitoramento da Plantação</h1>
+        </div>
+        <p class="lead" style="margin-top:1rem">Acompanhe as condições da sua lavoura.</p>
+        <p><span class="demo-badge">Dados fictícios de demonstração</span></p>
+
+        <div class="indicators" role="list" aria-label="Indicadores demonstrativos">
+          <article class="indicator water" role="listitem">
+            <img src="assets/icons/drop.svg" alt="" width="38" height="38">
+            <span class="label">Umidade do Solo</span>
+            <span class="value">72%</span>
+          </article>
+          <article class="indicator heat" role="listitem">
+            <img src="assets/icons/thermo.svg" alt="" width="38" height="38">
+            <span class="label">Temperatura</span>
+            <span class="value">24 °C</span>
+          </article>
+          <article class="indicator light" role="listitem">
+            <img src="assets/icons/sun.svg" alt="" width="38" height="38">
+            <span class="label">Luminosidade</span>
+            <span class="value">85%</span>
+          </article>
+        </div>
+        <p class="demo-note">Os valores acima são exemplos fixos. Não há conexão com sensores reais.</p>
+      </section>
+
+      <section class="obs-box" aria-labelledby="titulo-obs">
+        <h2 id="titulo-obs"><img src="assets/icons/chat.svg" alt="" width="24" height="24"> Registrar Observações</h2>
+        <form id="form-observacoes" novalidate>
+          <div class="field">
+            <label class="sr-label" for="observacao">Observações do agricultor</label>
+            <textarea id="observacao" name="observacao" placeholder="Digite suas observações..." maxlength="500" aria-describedby="observacao-erro"></textarea>
+            <p class="field-error" id="observacao-erro"></p>
+          </div>
+          <button class="btn btn-block" type="submit">
+            <img src="assets/icons/send.svg" alt="" width="20" height="20">
+            Registrar
+          </button>
+        </form>
+        <div class="feedback" id="feedback-observacoes" role="status" aria-live="polite"></div>
+        <ul class="obs-list" id="lista-observacoes" aria-label="Observações registradas nesta sessão"></ul>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p class="footer-brand"><img src="assets/icons/leaf.svg" alt="" width="22" height="22"> AgroTech | Todos Contra a Fome</p>
+      <p class="footer-msg">Juntos por uma agricultura mais forte e sustentável. <img src="assets/icons/leaf.svg" alt="" width="22" height="22"></p>
+    </div>
+  </footer>
+</body>
+</html>

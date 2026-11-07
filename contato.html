@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Fale Conosco | AgroTech — Todos Contra a Fome</title>
+  <meta name="description" content="Tire suas dúvidas, envie sugestões ou fale com a equipe do AgroTech.">
+  <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="js/main.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="index.html" aria-label="AgroTech — página inicial">
+        <img src="assets/icons/leaf.svg" alt="" width="38" height="38">
+        <span>Agrotech</span>
+      </a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="menu-principal" aria-label="Abrir menu">
+        <span></span>
+      </button>
+      <nav class="nav" id="menu-principal" aria-label="Navegação principal">
+        <ul class="nav-list">
+          <li><a href="index.html">Início</a></li>
+          <li><a href="planejamento.html">Planejamento</a></li>
+          <li><a href="monitoramento.html">Monitoramento</a></li>
+          <li><a href="ia.html">IA</a></li>
+          <li><a href="contato.html" aria-current="page">Contato</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="conteudo">
+    <div class="container split contact-split">
+      <div class="blob-wrap">
+        <div class="blob">
+          <img src="assets/images/muda.svg" alt="Ilustração de uma muda verde crescendo no solo" width="600" height="600">
+        </div>
+      </div>
+
+      <section aria-labelledby="titulo-contato">
+        <div class="title-with-icon">
+          <img src="assets/icons/mail.svg" alt="" width="40" height="40">
+          <h1 id="titulo-contato">Entre em Contato</h1>
+        </div>
+        <p class="lead" style="margin-top:1rem">Tire suas dúvidas, envie sugestões ou fale com a gente!</p>
+
+        <form class="form" id="form-contato" aria-describedby="nota-contato">
+          <div class="field">
+            <div class="field-control">
+              <span class="field-icon"><img src="assets/icons/user.svg" alt="" width="20" height="20"></span>
+              <label class="sr-label" for="nome">Nome completo</label>
+              <input type="text" id="nome" name="nome" placeholder="Nome Completo" required minlength="3" maxlength="80" autocomplete="name" aria-describedby="nome-erro">
+            </div>
+            <p class="field-error" id="nome-erro"></p>
+          </div>
+          <div class="field">
+            <div class="field-control">
+              <span class="field-icon"><img src="assets/icons/mail.svg" alt="" width="20" height="20"></span>
+              <label class="sr-label" for="email">E-mail</label>
+              <input type="email" id="email" name="email" placeholder="E-mail" required maxlength="100" autocomplete="email" aria-describedby="email-erro">
+            </div>
+            <p class="field-error" id="email-erro"></p>
+          </div>
+          <div class="field">
+            <div class="field-control">
+              <span class="field-icon"><img src="assets/icons/list.svg" alt="" width="20" height="20"></span>
+              <label class="sr-label" for="assunto">Assunto</label>
+              <select id="assunto" name="assunto" required aria-describedby="assunto-erro">
+                <option value="" selected disabled>Assunto</option>
+                <option value="duvida">Dúvida</option>
+                <option value="sugestao">Sugestão</option>
+                <option value="parceria">Parceria</option>
+                <option value="outro">Outro</option>
+              </select>
+            </div>
+            <p class="field-error" id="assunto-erro"></p>
+          </div>
+          <div class="field">
+            <div class="field-control">
+              <span class="field-icon"><img src="assets/icons/chat.svg" alt="" width="20" height="20"></span>
+              <label class="sr-label" for="mensagem">Mensagem</label>
+              <textarea id="mensagem" name="mensagem" placeholder="Mensagem" required minlength="10" maxlength="500" rows="4" aria-describedby="mensagem-erro"></textarea>
+            </div>
+            <p class="field-error" id="mensagem-erro"></p>
+          </div>
+          <button class="btn btn-block" type="submit">
+            <img src="assets/icons/send.svg" alt="" width="20" height="20">
+            Enviar Mensagem
+          </button>
+        </form>
+
+        <div class="feedback" id="feedback-contato" role="status" aria-live="polite"></div>
+        <p class="demo-note" id="nota-contato">Envio simulado: o protótipo não está integrado a nenhum serviço de mensagens. Pedimos apenas nome e e-mail para contato.</p>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p class="footer-brand"><img src="assets/icons/leaf.svg" alt="" width="22" height="22"> AgroTech | Todos Contra a Fome</p>
+      <p class="footer-msg">Juntos por uma agricultura mais forte e sustentável. <img src="assets/icons/leaf.svg" alt="" width="22" height="22"></p>
+    </div>
+  </footer>
+</body>
+</html>
