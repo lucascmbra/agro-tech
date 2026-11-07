@@ -1,6 +1,45 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" preserveAspectRatio="xMidYMid slice">
-<defs><linearGradient id="s" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#9ec2d8"/><stop offset=".6" stop-color="#f7d9a0"/><stop offset="1" stop-color="#f3a35a"/></linearGradient></defs>
-<rect width="640" height="360" fill="url(#s)"/><circle cx="320" cy="170" r="42" fill="#fff3c4"/>
-<rect y="180" width="640" height="180" fill="#5f9a2a"/>
-<g stroke="#2f6b1f" stroke-width="8" opacity=".6"><path d="M320 180L-100 360"/><path d="M320 180L120 360"/><path d="M320 180L320 360"/><path d="M320 180L520 360"/><path d="M320 180L740 360"/></g>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" preserveAspectRatio="xMidYMid slice">
+    <defs>
+        <linearGradient id="sky" x2="0" y2="1">
+            <stop stop-color="#739d97"/>
+            <stop offset=".65" stop-color="#e8d8ac"/>
+            <stop offset="1" stop-color="#f6cd81"/>
+        </linearGradient>
+        <radialGradient id="glow">
+            <stop stop-color="#fff3c8" stop-opacity=".9"/>
+            <stop offset="1" stop-color="#f7d795" stop-opacity="0"/>
+        </radialGradient>
+        <linearGradient id="soil" x2=".3" y2="1">
+            <stop stop-color="#6e9350"/>
+            <stop offset="1" stop-color="#153f30"/>
+        </linearGradient>
+        <linearGradient id="crop" x2="0" y2="1">
+            <stop stop-color="#bdd783"/>
+            <stop offset="1" stop-color="#52844b"/>
+        </linearGradient>
+    </defs>
+    <path fill="url(#sky)" d="M0 0h960v540H0z"/>
+    <circle cx="695" cy="200" r="180" fill="url(#glow)"/>
+    <circle cx="695" cy="200" r="36" fill="#fff0bb"/>
+    <path d="M0 247Q130 154 280 229T590 219T960 202V360H0Z" fill="#66866a"/>
+    <path d="M0 275Q150 223 315 256T650 244T960 253V370H0Z" fill="#3f6954"/>
+    <path d="M0 308Q400 248 960 286V540H0Z" fill="url(#soil)"/>
+    <g fill="url(#crop)">
+        <path d="M465 280 0 387v48l481-155Z"/>
+        <path d="M490 280 0 500v40h47l457-260Z"/>
+        <path d="m519 280-316 260h91l237-260Z"/>
+        <path d="m544 280-88 260h93l8-260Z"/>
+        <path d="m570 280 137 260h98L584 280Z"/>
+        <path d="m596 280 364 255v-76L609 280Z"/>
+        <path d="m623 280 337 128v-44L635 280Z"/>
+    </g>
+    <g fill="none" stroke="#d8e5a0" stroke-opacity=".3" stroke-width="2">
+        <path d="M480 283 0 417M500 283 34 540M526 283 264 540M551 283 504 540M578 283 763 540M604 283 960 493"/>
+    </g>
+    <g fill="#234f3d">
+        <path d="M73 284v-64h7v64z"/>
+        <path d="M40 243q-15-26 10-38-4-28 23-30 22-13 36 12 30 7 15 37 6 21-26 23Z"/>
+        <path d="M855 276v-42h5v42z"/>
+        <path d="M830 243q-13-21 7-31 2-30 25-23 26-2 25 24 22 24-8 32Z"/>
+    </g>
 </svg>

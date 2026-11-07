@@ -1,218 +1,226 @@
-/* AgroTech | Todos Contra a Fome — JavaScript puro */
-(function () {
-  "use strict";
+let botaoMenu = document.querySelector(".menu-toggle");
+let menu = document.getElementById("menu-principal");
 
-  /* ---------- Menu hambúrguer ---------- */
-  var toggle = document.querySelector(".menu-toggle");
-  var nav = document.getElementById("menu-principal");
-
-  if (toggle && nav) {
-    var setMenu = function (open) {
-      toggle.setAttribute("aria-expanded", String(open));
-      toggle.setAttribute("aria-label", open ? "Fechar menu" : "Abrir menu");
-      nav.classList.toggle("is-open", open);
-    };
-    toggle.addEventListener("click", function () {
-      setMenu(toggle.getAttribute("aria-expanded") !== "true");
+if (botaoMenu && menu) {
+    function abrirMenu(aberto) {
+        botaoMenu.setAttribute("aria-expanded", String(aberto));
+        botaoMenu.setAttribute("aria-label", aberto ? "Fechar menu" : "Abrir menu");
+        menu.classList.toggle("is-open", aberto);
+    }
+    botaoMenu.addEventListener("click", function () {
+        abrirMenu(botaoMenu.getAttribute("aria-expanded") !== "true");
     });
-    document.addEventListener("keydown", function (e) {
-      if (e.key === "Escape" && nav.classList.contains("is-open")) {
-        setMenu(false);
-        toggle.focus();
-      }
+    document.addEventListener("keydown", function (evento) {
+        if (evento.key === "Escape" && menu.classList.contains("is-open")) {
+            abrirMenu(false);
+            botaoMenu.focus();
+        }
     });
     window.addEventListener("resize", function () {
-      if (window.innerWidth > 760) setMenu(false);
+        if (window.innerWidth > 760) {
+            abrirMenu(false);
+        }
     });
-  }
+}
 
-  /* ---------- Utilidades de formulário ---------- */
-  function showFeedback(el, message, isError) {
-    if (!el) return;
-    el.textContent = message;
-    el.classList.toggle("is-error", !!isError);
-    el.classList.remove("is-visible");
-    void el.offsetWidth; // reinicia a animação
-    el.classList.add("is-visible");
-  }
+function mostrarMensagem(elemento, mensagem, erro) {
+    if (!elemento) {
+        return;
+    }
+    elemento.textContent = mensagem;
+    elemento.classList.toggle("is-error", !!erro);
+    elemento.classList.remove("is-visible");
+    void elemento.offsetWidth;
+    elemento.classList.add("is-visible");
+}
 
-  function setFieldError(field, message) {
-    var wrap = field.closest(".field");
-    if (!wrap) return;
-    var err = wrap.querySelector(".field-error");
-    wrap.classList.toggle("has-error", !!message);
-    field.setAttribute("aria-invalid", message ? "true" : "false");
-    if (err) err.textContent = message || "";
-  }
+function mostrarErro(campo, mensagem) {
+    let grupo = campo.closest(".field");
+    if (!grupo) {
+        return;
+    }
+    let aviso = grupo.querySelector(".field-error");
+    grupo.classList.toggle("has-error", !!mensagem);
+    campo.setAttribute("aria-invalid", mensagem ? "true" : "false");
+    if (aviso) {
+        aviso.textContent = mensagem || "";
+    }
+}
 
-  // Validação nativa do HTML5 com mensagens exibidas na tela
-  function enableNativeValidation(form) {
-    form.addEventListener(
-      "invalid",
-      function (e) {
-        e.preventDefault(); // troca o balão do navegador por texto acessível
-        setFieldError(e.target, e.target.validationMessage);
-      },
-      true
+function validarFormulario(formulario) {
+    formulario.addEventListener(
+        "invalid",
+        function (evento) {
+            evento.preventDefault();
+            mostrarErro(evento.target, evento.target.validationMessage);
+        },
+        true
     );
-    form.addEventListener("input", function (e) {
-      if (e.target.validity && e.target.validity.valid) setFieldError(e.target, "");
+    formulario.addEventListener("input", function (evento) {
+        if (evento.target.validity && evento.target.validity.valid) {
+            mostrarErro(evento.target, "");
+        }
     });
-    form.addEventListener("change", function (e) {
-      if (e.target.validity && e.target.validity.valid) setFieldError(e.target, "");
+    formulario.addEventListener("change", function (evento) {
+        if (evento.target.validity && evento.target.validity.valid) {
+            mostrarErro(evento.target, "");
+        }
     });
-  }
+}
 
-  function focusFirstInvalid(form) {
-    var first = form.querySelector(":invalid");
-    if (first) first.focus();
-  }
+function focarCampoInvalido(formulario) {
+    let primeiroCampo = formulario.querySelector(":invalid");
+    if (primeiroCampo) {
+        primeiroCampo.focus();
+    }
+}
 
-  function escapeText(value) {
-    return String(value).replace(/[<>&"]/g, "");
-  }
+function limparTexto(valor) {
+    return String(valor).replace(/[<>&"]/g, "");
+}
 
-  /* ---------- Planejamento ---------- */
-  var formPlan = document.getElementById("form-planejamento");
-  if (formPlan) {
-    enableNativeValidation(formPlan);
-    var planFeedback = document.getElementById("feedback-planejamento");
+let formPlanejamento = document.getElementById("form-planejamento");
+if (formPlanejamento) {
+    validarFormulario(formPlanejamento);
+    let mensagemPlanejamento = document.getElementById("feedback-planejamento");
 
-    formPlan.addEventListener("submit", function (e) {
-      e.preventDefault();
-      if (!formPlan.checkValidity()) {
-        focusFirstInvalid(formPlan);
-        return;
-      }
-      var cultura = formPlan.cultura.options[formPlan.cultura.selectedIndex].text;
-      var area = Number(formPlan.area.value).toLocaleString("pt-BR");
-      var local = escapeText(formPlan.localizacao.value.trim());
-      showFeedback(
-        planFeedback,
-        "Planejamento de demonstração gerado para " + cultura + ", área de " + area +
-          " ha, em " + local + ". Esta é apenas uma simulação da interface: " +
-          "não há análise agronômica real. Procure orientação técnica antes de decidir o manejo."
-      );
+    formPlanejamento.addEventListener("submit", function (evento) {
+        evento.preventDefault();
+        if (!formPlanejamento.checkValidity()) {
+            focarCampoInvalido(formPlanejamento);
+            return;
+        }
+        let cultura = formPlanejamento.cultura.options[formPlanejamento.cultura.selectedIndex].text;
+        let area = Number(formPlanejamento.area.value).toLocaleString("pt-BR");
+        let localizacao = limparTexto(formPlanejamento.localizacao.value.trim());
+        mostrarMensagem(
+            mensagemPlanejamento,
+            "Planejamento gerado para " + cultura + ", área de " + area +
+                " ha, em " + localizacao + "."
+        );
     });
-  }
+}
 
-  /* ---------- Monitoramento: registrar observações ---------- */
-  var formObs = document.getElementById("form-observacoes");
-  if (formObs) {
-    var obsField = document.getElementById("observacao");
-    var obsFeedback = document.getElementById("feedback-observacoes");
-    var obsList = document.getElementById("lista-observacoes");
+let formObservacoes = document.getElementById("form-observacoes");
+if (formObservacoes) {
+    let campoObservacao = document.getElementById("observacao");
+    let mensagemObservacoes = document.getElementById("feedback-observacoes");
+    let listaObservacoes = document.getElementById("lista-observacoes");
 
-    formObs.addEventListener("submit", function (e) {
-      e.preventDefault();
-      var text = obsField.value.trim();
-      if (!text) {
-        setFieldError(obsField, "Escreva uma observação antes de registrar.");
-        showFeedback(obsFeedback, "Não foi possível registrar: o campo está vazio.", true);
-        obsField.focus();
-        return;
-      }
-      setFieldError(obsField, "");
+    formObservacoes.addEventListener("submit", function (evento) {
+        evento.preventDefault();
+        let texto = campoObservacao.value.trim();
+        if (!texto) {
+            mostrarErro(campoObservacao, "Escreva uma observação antes de registrar.");
+            mostrarMensagem(mensagemObservacoes, "Não foi possível registrar: o campo está vazio.", true);
+            campoObservacao.focus();
+            return;
+        }
+        mostrarErro(campoObservacao, "");
 
-      var li = document.createElement("li");
-      var time = document.createElement("time");
-      var now = new Date();
-      time.dateTime = now.toISOString();
-      time.textContent = now.toLocaleString("pt-BR");
-      li.appendChild(time);
-      li.appendChild(document.createTextNode(text)); // textContent seguro
-      obsList.prepend(li);
+        let item = document.createElement("li");
+        let horario = document.createElement("time");
+        let agora = new Date();
+        horario.dateTime = agora.toISOString();
+        horario.textContent = agora.toLocaleString("pt-BR");
+        item.appendChild(horario);
+        item.appendChild(document.createTextNode(texto));
+        listaObservacoes.prepend(item);
 
-      obsField.value = "";
-      showFeedback(
-        obsFeedback,
-        "Observação registrada com sucesso! (Demonstração: o registro fica apenas nesta página e é perdido ao recarregar.)"
-      );
+        campoObservacao.value = "";
+        mostrarMensagem(
+            mensagemObservacoes,
+            "Observação registrada! Disponível até recarregar a página."
+        );
     });
 
-    obsField.addEventListener("input", function () {
-      if (obsField.value.trim()) setFieldError(obsField, "");
+    campoObservacao.addEventListener("input", function () {
+        if (campoObservacao.value.trim()) {
+            mostrarErro(campoObservacao, "");
+        }
     });
-  }
+}
 
-  /* ---------- IA: exemplos de recomendações ---------- */
-  var btnAnalise = document.getElementById("btn-nova-analise");
-  if (btnAnalise) {
-    var examples = [
-      {
-        level: "",
-        title: "Sua plantação está saudável!",
-        text: "Continue monitorando as condições para manter uma boa produção.",
-        tips: ["Mantenha a umidade do solo adequada.", "Fique atento a possíveis pragas."]
-      },
-      {
-        level: "is-warn",
-        title: "Atenção à umidade do solo",
-        text: "Exemplo: a umidade parece abaixo do ideal. Verifique a necessidade de irrigação.",
-        tips: ["Observe o solo no início da manhã.", "Use a água de forma consciente, sem desperdício."]
-      },
-      {
-        level: "is-alert",
-        title: "Observe sinais de pragas",
-        text: "Exemplo: folhas com manchas podem merecer uma inspeção mais atenta.",
-        tips: ["Inspecione as folhas com frequência.", "Registre o que observar e busque apoio técnico local."]
-      }
+let botaoAnalise = document.getElementById("btn-nova-analise");
+if (botaoAnalise) {
+    let exemplos = [
+        {
+            classe: "",
+            titulo: "Sua plantação está saudável!",
+            texto: "Continue monitorando as condições para manter uma boa produção.",
+            dicas: ["Mantenha a umidade do solo adequada.", "Fique atento a possíveis pragas."]
+        },
+        {
+            classe: "is-warn",
+            titulo: "Atenção à umidade do solo",
+            texto: "A umidade parece abaixo do ideal. Verifique a necessidade de irrigação.",
+            dicas: ["Observe o solo no início da manhã.", "Use a água de forma consciente, sem desperdício."]
+        },
+        {
+            classe: "is-alert",
+            titulo: "Observe sinais de pragas",
+            texto: "Folhas com manchas podem merecer uma inspeção mais atenta.",
+            dicas: ["Inspecione as folhas com frequência.", "Registre o que observar e busque apoio técnico local."]
+        }
     ];
-    var current = 0;
-    var card = document.getElementById("status-card");
-    var cardTitle = document.getElementById("status-titulo");
-    var cardText = document.getElementById("status-texto");
-    var tipsList = document.getElementById("lista-dicas");
-    var live = document.getElementById("feedback-analise");
+    let indice = 0;
+    let cartao = document.getElementById("status-card");
+    let tituloCartao = document.getElementById("status-titulo");
+    let textoCartao = document.getElementById("status-texto");
+    let listaDicas = document.getElementById("lista-dicas");
+    let mensagemAnalise = document.getElementById("feedback-analise");
 
-    btnAnalise.addEventListener("click", function () {
-      current = (current + 1) % examples.length;
-      var ex = examples[current];
-      card.className = "status-card " + ex.level;
-      cardTitle.textContent = ex.title;
-      cardText.textContent = ex.text;
-      tipsList.innerHTML = "";
-      ex.tips.forEach(function (t) {
-        var li = document.createElement("li");
-        li.textContent = t;
-        tipsList.appendChild(li);
-      });
-      showFeedback(live, "Exemplo " + (current + 1) + " de " + examples.length + " exibido (demonstração, sem análise real).");
+    botaoAnalise.addEventListener("click", function () {
+        indice = (indice + 1) % exemplos.length;
+        let exemplo = exemplos[indice];
+        cartao.className = "status-card " + exemplo.classe;
+        tituloCartao.textContent = exemplo.titulo;
+        textoCartao.textContent = exemplo.texto;
+        listaDicas.innerHTML = "";
+        exemplo.dicas.forEach(function (dica) {
+            let item = document.createElement("li");
+            item.textContent = dica;
+            listaDicas.appendChild(item);
+        });
+        mostrarMensagem(mensagemAnalise, "Recomendações atualizadas.");
     });
-  }
+}
 
-  /* ---------- Contato ---------- */
-  var formContato = document.getElementById("form-contato");
-  if (formContato) {
-    enableNativeValidation(formContato);
-    var contatoFeedback = document.getElementById("feedback-contato");
+let formContato = document.getElementById("form-contato");
+if (formContato) {
+    validarFormulario(formContato);
+    let mensagemContato = document.getElementById("feedback-contato");
 
-    formContato.addEventListener("submit", function (e) {
-      e.preventDefault();
-      if (!formContato.checkValidity()) {
-        showFeedback(contatoFeedback, "Revise os campos destacados antes de enviar.", true);
-        focusFirstInvalid(formContato);
-        return;
-      }
-      var nome = escapeText(formContato.nome.value.trim().split(" ")[0]);
-      showFeedback(
-        contatoFeedback,
-        "Obrigado, " + nome + "! Envio simulado: este protótipo não está integrado a nenhum serviço de mensagens, então nada foi enviado."
-      );
-      formContato.reset();
+    formContato.addEventListener("submit", function (evento) {
+        evento.preventDefault();
+        if (!formContato.checkValidity()) {
+            mostrarMensagem(mensagemContato, "Revise os campos destacados antes de enviar.", true);
+            focarCampoInvalido(formContato);
+            return;
+        }
+        let nome = limparTexto(formContato.nome.value.trim().split(" ")[0]);
+        mostrarMensagem(
+            mensagemContato,
+            "Obrigado, " + nome + "! Demonstração concluída. Nenhuma mensagem foi enviada."
+        );
+        formContato.reset();
     });
-  }
+}
 
-  /* ---------- Pitch Vídeo: placeholder se o arquivo não existir ---------- */
-  var videoBox = document.querySelector(".video-box");
-  if (videoBox) {
-    var video = videoBox.querySelector("video");
-    var source = video.querySelector("source");
-    var markMissing = function () {
-      videoBox.classList.add("is-missing");
-      video.removeAttribute("controls");
-    };
-    if (source) source.addEventListener("error", markMissing);
-    video.addEventListener("error", markMissing);
-  }
-})();
+let caixaVideo = document.querySelector(".video-box");
+if (caixaVideo) {
+    let video = caixaVideo.querySelector(".video-player");
+    let capa = caixaVideo.querySelector(".video-cover");
+    capa.addEventListener("click", function () {
+        if (window.location.protocol !== "http:" && window.location.protocol !== "https:") {
+            window.open("https://www.youtube.com/watch?v=QftPNP8WEoM", "_blank", "noopener,noreferrer");
+            return;
+        }
+        let urlVideo = new URL(video.getAttribute("data-src"));
+        urlVideo.searchParams.set("origin", window.location.origin);
+        video.src = urlVideo.toString();
+        video.removeAttribute("tabindex");
+        caixaVideo.classList.add("is-playing");
+        video.focus();
+    });
+}
