@@ -289,9 +289,9 @@ p { margin: 0 0 1rem; }
 /* ---------- Page split (Planejamento / Contato) ---------- */
 .split {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   align-items: center;
-  gap: 2rem;
+  gap: 4rem;
   padding-top: 2.5rem;
   padding-bottom: 3rem;
 }
@@ -516,7 +516,7 @@ p { margin: 0 0 1rem; }
 @media (max-width: 900px) {
   .hero { grid-template-columns: 1fr; padding-top: 1.5rem; }
   .hero-image { margin-right: 0; min-height: 240px; border-radius: 40px 0 0 0; order: -1; margin-left: -1.5rem; margin-right: -1.5rem; border-radius: 0 0 50% 0 / 0 0 60% 0; }
-  .split { grid-template-columns: 1fr; gap: 1.5rem; padding-top: 1.5rem; }
+  .split { grid-template-columns: 1fr; gap: 3rem; padding-top: 1.5rem; }
   .split .blob-wrap { max-width: 420px; margin: 0.5rem auto 0; width: 88%; }
   .contact-split .blob-wrap { order: -1; }
   .video-section { grid-template-columns: 1fr; }
